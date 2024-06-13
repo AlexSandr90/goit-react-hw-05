@@ -12,7 +12,7 @@ import { fetchTrendingMovies } from '../../fetch';
 
 const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
-  const [movieId, setMovieId] = useState(0)
+  const [movieId, setMovieId] = useState(0);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const App = () => {
       try {
         const movies = await fetchTrendingMovies();
         setTrendingMovies(movies.results);
-
       } catch (error) {
         setError(true);
       }
@@ -33,11 +32,15 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage movies={trendingMovies} getMovieId={setMovieId} />} />
+        <Route
+          path="/"
+          element={<HomePage movies={trendingMovies} getMovieId={setMovieId} />}
+        />
         <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
-        <Route path="/movies/:movieId/cast" element={<MovieCast />} />
-        <Route path="/movies/:movieId/reviews" element={<MovieReviews />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

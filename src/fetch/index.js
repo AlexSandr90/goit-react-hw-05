@@ -43,8 +43,36 @@ export const fetchMovieById = async (id = 0) => {
       },
     });
 
-    return response.data
+    return response.data;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const fetchMovieCast = async (id = 0) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/3/movie/${id}/credits`, {
+      headers: {
+        Authorization: `Bearer ${API_READ_ACCESS_TOKEN}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log('fetchMovieCast error', error);
+  }
+};
+
+export const fetchMovieReviews = async (id = 0) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/3/movie/${id}/reviews`, {
+      headers: {
+        Authorization: `Bearer ${API_READ_ACCESS_TOKEN}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log('fetchMovieCast error', error);
   }
 };

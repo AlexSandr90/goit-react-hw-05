@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../fetch';
-
+import { Link } from 'react-router-dom';
 import classes from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
@@ -44,11 +44,17 @@ const MovieDetailsPage = () => {
           <p>{overview}</p>
           <h2>Genres</h2>
           <ul>
-            {genres.map(({ id, name }) => (
-              <li key={id}>{name}</li>
-            ))}
+            {genres &&
+              genres.map(({ id, name }) => {
+                return <li key={id}>{name}</li>;
+              })}
           </ul>
           <p>Additional information</p>
+          <nav>
+            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          </nav>
+          <Outlet />
         </>
       )}
     </div>
