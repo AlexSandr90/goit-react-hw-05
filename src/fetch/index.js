@@ -4,7 +4,7 @@ const BASE_URL = 'https://api.themoviedb.org';
 const API_READ_ACCESS_TOKEN =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YTAxYTY0Yjc0ZTU3NDQ2MjhkNzBlOTU4MTE1NjRjYiIsInN1YiI6IjY2NjIzMmNkNDI0NTU0YTFjODlmODM4OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.heO_-shIZ4PzL8QE-apBRsZ8sprThubyMQreHgUDW_0';
 
-export const fetchMovies = async (query = '') => {
+export const fetchMoviesByQuery = async (query = '') => {
   try {
     const response = await axios.get(`${BASE_URL}/3/search/movie`, {
       params: { query },
