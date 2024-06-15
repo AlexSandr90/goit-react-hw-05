@@ -1,38 +1,32 @@
 import classes from './HomePage.module.css';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { fetchTrendingMovies } from '../../fetch';
+import MovieList from '../../components/MovieList/MovieList';
 
-const HomePage = ({ movies, getMovieId }) => {
-  const handleMovieId = (id) => {
-    getMovieId(id);
-  };
+const HomePage = () => {
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const movies = await fetchTrendingMovies();
+        setTrendingMovies(movies.results);
+      } catch (error) {
+        setError(true);
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
-    <div >
+    <div>
       <h1>Trending today</h1>
-      <ul>
-        {movies.map(({ title, id }) => {
-          return (
-            <li key={id}>
-              <Link to={`/movies/${id}`} onClick={() => handleMovieId(id)}>
-                {title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      {error && <p>We does not have any trending movies for this date.</p>}
+      <MovieList movies={trendingMovies} />
     </div>
   );
 };
 
 export default HomePage;
-
-HomePage.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-    }).isRequired
-  ),
-  getMovieId: PropTypes.func.isRequired,
-};

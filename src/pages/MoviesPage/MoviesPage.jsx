@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import classes from './MoviesPage.module.css';
-import { Link } from 'react-router-dom';
 import { fetchMoviesByQuery } from '../../fetch';
 import GoBack from '../../components/GoBack/GoBack';
+import MovieList from '../../components/MovieList/MovieList';
 
 const MoviesPage = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -17,7 +17,6 @@ const MoviesPage = () => {
     }
     try {
       const datas = await fetchMoviesByQuery(trimmedSearchValue);
-      console.log('datas: ', datas.results);
       setMovies(datas.results);
     } catch (error) {
       console.error('Error fetching movies: ', error);
@@ -26,10 +25,6 @@ const MoviesPage = () => {
       setSearchValue('');
     }
   };
-
- 
-
-  console.log('movies: ', movies);
 
   return (
     <div className={classes.moviePage}>
@@ -43,17 +38,7 @@ const MoviesPage = () => {
         <button type="submit">Search</button>
       </form>
 
-      <ul>
-        {movies && movies.length > 0 ? (
-          movies.map(({ title, id }) => (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>{title}</Link>
-            </li>
-          ))
-        ) : (
-          <li>No movies found</li>
-        )}
-      </ul>
+      <MovieList movies={movies} />
     </div>
   );
 };
