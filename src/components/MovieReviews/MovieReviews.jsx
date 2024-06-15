@@ -12,8 +12,10 @@ const MovieReviews = () => {
     const getData = async () => {
       try {
         const currentReviews = await fetchMovieReviews(movieId);
-        console.log('currentCast: ', currentReviews);
-        setReviews(currentReviews.results);
+
+        currentReviews.results.length > 0
+          ? setReviews(currentReviews.results)
+          : setError(true);
       } catch (error) {
         setError(true);
         console.log('error', error);
@@ -32,7 +34,7 @@ const MovieReviews = () => {
         <ul>
           {reviews.map(({ id, author, content }) => (
             <li key={id}>
-              <p>{author}</p>
+              <h3>{author}</h3>
               <p>{content}</p>
             </li>
           ))}

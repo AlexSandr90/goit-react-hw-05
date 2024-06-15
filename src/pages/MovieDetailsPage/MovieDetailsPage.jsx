@@ -10,13 +10,10 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [error, setError] = useState(false);
 
-  console.log('movieId', movieId);
-
   useEffect(() => {
     const getData = async () => {
       try {
         const currentMovie = await fetchMovieById(movieId);
-        console.log('currentMovie: ', currentMovie);
         setMovie(currentMovie);
       } catch (error) {
         setError(true);
@@ -56,7 +53,7 @@ const MovieDetailsPage = () => {
           </div>
           <div>
             <p>Additional information</p>
-            <nav>
+            <nav className={classes.additionalNav}>
               <Link to={`/movies/${movieId}/cast`}>Cast</Link>
               <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
             </nav>

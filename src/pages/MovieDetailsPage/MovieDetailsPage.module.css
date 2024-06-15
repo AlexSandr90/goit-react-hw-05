@@ -44,3 +44,8 @@ ul {
 ul li {
     margin-bottom: 5px;
 }
+
+.additionalNav {
+    display: flex;
+    flex-direction: column;
+}

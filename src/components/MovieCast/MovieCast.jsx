@@ -12,9 +12,12 @@ const MovieCast = () => {
     const getData = async () => {
       try {
         const currentCast = await fetchMovieCast(movieId);
-        console.log('currentCast: ', currentCast);
-        setCast(currentCast.cast);
-      } catch (error) {
+
+        currentCast.cast.length > 0
+          ? setCast(currentCast.cast)
+          : setError(true);
+
+        } catch (error) {
         setError(true);
         console.log('error', error);
       }
