@@ -2,6 +2,7 @@ import { useState } from 'react';
 import classes from './MoviesPage.module.css';
 import { Link } from 'react-router-dom';
 import { fetchMoviesByQuery } from '../../fetch';
+import GoBack from '../../components/GoBack/GoBack';
 
 const MoviesPage = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -26,10 +27,13 @@ const MoviesPage = () => {
     }
   };
 
+ 
+
   console.log('movies: ', movies);
 
   return (
     <div className={classes.moviePage}>
+      <GoBack />
       <form onSubmit={handleSearch}>
         <input
           type="text"

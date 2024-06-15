@@ -8,8 +8,6 @@ const MovieCast = () => {
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(false);
 
-  console.log('MovieCast movieId', movieId);
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,11 +27,15 @@ const MovieCast = () => {
 
   return (
     <div className={classes.movieCast}>
-      {error && <p>Failed to fetch cast details.</p>}
+      {error && <p>We does not have any casts for this movie.</p>}
       {cast && (
-        <ul>
-          {cast.map(({ id, name, character }) => (
-            <li key={id}>
+        <ul className={classes.castList}>
+          {cast.map(({ id, name, character, profile_path }) => (
+            <li key={id} className={classes.castItem}>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+                alt={name}
+              />
               <p>{name}</p>
               <p>{character}</p>
             </li>

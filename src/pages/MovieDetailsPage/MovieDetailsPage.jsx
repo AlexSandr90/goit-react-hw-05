@@ -3,6 +3,7 @@ import { Outlet, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../fetch';
 import { Link } from 'react-router-dom';
 import classes from './MovieDetailsPage.module.css';
+import GoBack from '../../components/GoBack/GoBack';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -30,34 +31,40 @@ const MovieDetailsPage = () => {
   const { backdrop_path, title, overview, genres } = movie;
 
   return (
-    <div>
+    <>
+      <GoBack />
       {error && <p>Failed to fetch movie details.</p>}
       {movie && (
-        <>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-            alt={title}
-          />
-          <h1>{title}</h1>
-          {/* <p>User Score: {} %</p> */}
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h2>Genres</h2>
-          <ul>
-            {genres &&
-              genres.map(({ id, name }) => {
-                return <li key={id}>{name}</li>;
-              })}
-          </ul>
-          <p>Additional information</p>
-          <nav>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-          </nav>
-          <Outlet />
-        </>
+        <div>
+          <div className={classes.imgBlock}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+              alt={title}
+            />
+            <div>
+              <h1>{title}</h1>
+              <h2>Overview</h2>
+              <p>{overview}</p>
+              <h2>Genres</h2>
+              <ul className={classes.genresList}>
+                {genres &&
+                  genres.map(({ id, name }) => {
+                    return <li key={id}>{name}</li>;
+                  })}
+              </ul>
+            </div>
+          </div>
+          <div>
+            <p>Additional information</p>
+            <nav>
+              <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+              <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            </nav>
+            <Outlet />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

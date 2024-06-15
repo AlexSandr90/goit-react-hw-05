@@ -27,7 +27,7 @@ const MovieReviews = () => {
 
   return (
     <div>
-      {error && <p>Failed to fetch cast details.</p>}
+      {error && <p>We does not have any reviews for this movie.</p>}
       {reviews && (
         <ul>
           {reviews.map(({ id, author, content }) => (
