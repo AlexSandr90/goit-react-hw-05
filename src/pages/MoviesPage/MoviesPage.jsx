@@ -29,7 +29,6 @@ const MoviesPage = () => {
       return;
     }
     setSearchParams({ query: trimmedSearchValue });
-    searchMovies(trimmedSearchValue);
   };
 
   const searchMovies = async (query) => {
