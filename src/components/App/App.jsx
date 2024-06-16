@@ -1,6 +1,6 @@
 import './App.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
-import Navigations from '../Navigations/Navigations';
+import { lazy, Suspense } from 'react';
+import Navigation from '../Navigation/Navigation';
 import { Route, Routes } from 'react-router-dom';
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
@@ -16,7 +16,7 @@ const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
 const App = () => {
   return (
     <>
-      <Navigations />
+      <Navigation />
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<HomePage />} />
