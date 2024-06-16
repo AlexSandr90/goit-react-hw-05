@@ -3,14 +3,17 @@ import classes from './MoviesPage.module.css';
 import { fetchMoviesByQuery } from '../../fetch';
 import GoBack from '../../components/GoBack/GoBack';
 import MovieList from '../../components/MovieList/MovieList';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const [movies, setMovies] = useState([]);
+  const [searchParams] = useSearchParams();
 
   const handleSearch = async (e) => {
     e.preventDefault();
     const trimmedSearchValue = searchValue.trim();
+    console.log('searchParams: ', searchParams);
     if (trimmedSearchValue === '') {
       setMovies([]);
       return;

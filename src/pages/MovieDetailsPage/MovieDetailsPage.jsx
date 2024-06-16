@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieById } from '../../fetch';
 import { Link } from 'react-router-dom';
 import classes from './MovieDetailsPage.module.css';
@@ -9,6 +9,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const [error, setError] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const getData = async () => {
@@ -54,8 +55,12 @@ const MovieDetailsPage = () => {
           <div>
             <p>Additional information</p>
             <nav className={classes.additionalNav}>
-              <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-              <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+              <Link to={`/movies/${movieId}/cast`} state={location.state}>
+                Cast
+              </Link>
+              <Link to={`/movies/${movieId}/reviews`} state={location.state}>
+                Reviews
+              </Link>
             </nav>
             <Outlet />
           </div>
