@@ -10,6 +10,7 @@ const GoBack = () => {
     if (location.state && location.state.from) {
       navigate(location.state.from);
     } else {
+      navigate('/movies');
       console.log('second', '/movies');
     }
   };
