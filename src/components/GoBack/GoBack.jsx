@@ -8,7 +8,7 @@ const GoBack = () => {
 
   const handleGoBack = () => {
     if (location.state && location.state.from) {
-      navigate(-1);
+      navigate(location.state.from);
     } else {
       console.log('second', '/movies');
     }
